@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DB_URL")
+}
+
+enum TaskStatus {
+  WAITING
+  ACTIVE
+  COMPLETED
+  FAILED
+}
+
+model Queue {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  waiting   Int       @default(0)
+  active    Int       @default(0)
+  failed    Int       @default(0)
+  completed Int       @default(0)
+  checkedAt DateTime? @default(now())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  tasks     Task[]
+}
+
+model Task {
+  id        Int        @id @default(autoincrement())
+  jobId     String     @unique
+  name      String
+  queueId   Int
+  queue     Queue      @relation(fields: [queueId], references: [id])
+  status    TaskStatus @default(WAITING)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
