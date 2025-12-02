@@ -1,10 +1,10 @@
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = []
 }
 
 datasource db {
   provider = "mysql"
-  url      = env("DB_URL")
 }
 
 enum TaskStatus {

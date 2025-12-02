@@ -1,5 +1,5 @@
 import { Worker } from 'bullmq'
-import dragonfly from './dragonfly'
+import dragonfly from './dragonfly.js'
 
 class TaskWorker {
 	worker: Worker

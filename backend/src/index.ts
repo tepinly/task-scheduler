@@ -1,9 +1,9 @@
 import express from 'express'
 import { createServer } from 'node:http'
 import { Server, Socket } from 'socket.io'
-import TaskQueue from './TaskQueue'
-import EventEmitter from './EventEmitter'
-import type { TaskStatus } from './TaskQueue'
+import TaskQueue from './TaskQueue.js'
+import EventEmitter from './EventEmitter.js'
+import type { TaskStatus } from './TaskQueue.js'
 
 export class QueueManager {
 	private app: express.Application

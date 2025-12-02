@@ -1,7 +1,7 @@
 import { Queue, Job, QueueEvents } from 'bullmq'
-import dragonfly from './dragonfly'
-import prisma from './prisma'
-import type EventEmitter from './EventEmitter'
+import dragonfly from './dragonfly.js'
+import prisma from '../prisma/index.js'
+import type EventEmitter from './EventEmitter.js'
 
 const TaskStatus = {
 	WAITING: 'WAITING',
@@ -168,7 +168,9 @@ class TaskQueue {
 		})
 
 		for (const job of jobs) {
-			const task = tasks.find((task) => task.jobId === job.id)
+			const task = tasks.find(
+				(task: (typeof tasks)[0]) => task.jobId === job.id
+			)
 			if (!task) {
 				await job.remove()
 			}
